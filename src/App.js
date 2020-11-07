@@ -10,6 +10,7 @@ import QuizList from './panels/QuizList';
 import Quiz from './panels/Quiz';
 import Score from './panels/Score';
 import Stats from './panels/Stats';
+import Shop from './panels/Shop';
 import Persik from './panels/Persik';
 
 const App = () => {
