@@ -64,6 +64,7 @@ const App = () => {
 		<View activePanel={activePanel} popout={popout}>
 			<Home id='home' fetchedUser={fetchedUser} go={go} onClickCategory={onClickCategory} categories={categories} />
 			<QuizList id='quiz_list' go={go} quizzes={quizzes}/>
+			<Stats id='stats' fetchedUser={fetchedUser} go={go} />
 			<Persik id='persik' go={go} />
 		</View>
 	);
