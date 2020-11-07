@@ -17,7 +17,7 @@ import CONST from '../QuizHub-Network-Bridge/const';
 
 const Quiz = ({ id, go, run, fetchedUser, questionIndex, onClickBtnAnswer, onChangeQuestionCheckBox, onChangeQuestionRadio, onChangeQuestionText, answerButtonEnabled}) => (
 	<Panel id={id}>
-        <PanelHeader left={<PanelHeaderBack/>} right={run && ((typeof questionIndex == 'number' ? questionIndex : '-') + '/' + run.questions.length)} separator={true}>
+        <PanelHeader left={<PanelHeaderBack onClick={go} data-to="quiz_list"/>} right={run && ((typeof questionIndex == 'number' ? questionIndex : '-') + '/' + run.questions.length)} separator={true}>
             {run && run.quiz.title}
         </PanelHeader>
         {run && typeof questionIndex == 'number' &&
