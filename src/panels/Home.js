@@ -35,7 +35,7 @@ const Home = ({ id, go, onClickCategory, fetchedUser, categories }) => (
 				}, []).map(row => (
 					<CardGrid>
 						{row.map(category => (
-							<Card size="s" onClick={onClickCategory} data-id={category.id}>
+							<Card key={category.id} size="s" onClick={onClickCategory} data-id={category.id}>
 								<img style={{ height: 96, borderRadius: 'inherit' }} src={category.imgUrl} />
 								<h1>{category.name}</h1>
 							</Card>

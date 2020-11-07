@@ -21,6 +21,8 @@ const App = () => {
 	const [popout, setPopout] = useState(POPOUT_BLYAT);
 	const [categories, setCategories] = useState(null);
 	const [quizzes, setQuizes] = useState(null);
+	const [run, setRun] = useState(null);
+	const [questionIndex, setQuestionIndex] = useState(null);
 
 	useEffect(() => {
 		bridge.subscribe(({ detail: { type, data }}) => {
@@ -49,6 +51,7 @@ const App = () => {
 		for (let i = 0; i < categories.length; i++) {
 			let category = categories[i];
 			if (category.id === id) {
+				setQuizes(null);
 				setPopout(POPOUT_BLYAT);
 				setActivePanel('quiz_list');
 				category.getQuizzes().then(shit => {
@@ -60,11 +63,42 @@ const App = () => {
 		}
 	}
 
+	const onClickQuiz = e => {
+		let id = +e.currentTarget.dataset.id;
+		for (let i = 0; i < quizzes.length; i++) {
+			let quiz = quizzes[i];
+			if (quiz.id === id) {
+				setRun(null);
+				setPopout(POPOUT_BLYAT);
+				setActivePanel('run');
+				quiz.start().then(run => {
+					setRun(run);
+					setQuestionIndex(0);
+					setPopout(null);
+				})
+			}
+		}
+	}
+
+	const onClickBtnAnswer = e => {
+		if (!run || typeof questionIndex != 'number')
+			return;
+
+		//run.questions[questionIndex].answer([0]); // TODO атвет
+		if (questionIndex + 1 >= run.questions.length) {
+			setActivePanel('score');
+		} else {
+			setQuestionIndex(questionIndex + 1);
+		} 
+	}
+
 	return (
 		<View activePanel={activePanel} popout={popout}>
 			<Home id='home' fetchedUser={fetchedUser} go={go} onClickCategory={onClickCategory} categories={categories} />
-			<QuizList id='quiz_list' go={go} quizzes={quizzes}/>
+			<QuizList id='quiz_list' go={go} onClickQuiz={onClickQuiz} quizzes={quizzes}/>
 			<Stats id='stats' fetchedUser={fetchedUser} go={go} />
+			<Quiz id='run' fetchedUser={fetchedUser} run={run} questionIndex={questionIndex} setQuestionIndex={setQuestionIndex} go={go} onClickBtnAnswer={onClickBtnAnswer} />
+			<Score id='score' fetchedUser={fetchedUser} go={go} />
 			<Persik id='persik' go={go} />
 		</View>
 	);

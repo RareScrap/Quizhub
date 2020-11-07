@@ -13,42 +13,42 @@ import FormLayoutGroup from '@vkontakte/vkui/dist/components/FormLayoutGroup/For
 import Input from '@vkontakte/vkui/dist/components/Input/Input';
 import Button from '@vkontakte/vkui/dist/components/Button/Button';
 import Div from '@vkontakte/vkui/dist/components/Div/Div';
+import CONST from '../QuizHub-Network-Bridge/const';
 
-const Quiz = ({ id, go, fetchedUser }) => (
+const Quiz = ({ id, go, run, fetchedUser, questionIndex, onClickBtnAnswer}) => (
 	<Panel id={id}>
-        <PanelHeader left={<PanelHeaderBack/>} right={"1/10"} separator={true}>
-            Quiz #1
+        <PanelHeader left={<PanelHeaderBack/>} right={run && ((typeof questionIndex == 'number' ? questionIndex : '-') + '/' + run.questions.length)} separator={true}>
+            {run && run.quiz.title}
         </PanelHeader>
-        <CardGrid style={{ margin : 20 }}>
-          <Card style={{ padding : 20 }} size="xl" mode="shadow">
-            ЯLorem ipsum dolor sit amet, consectetur.
-            ЯLorem ipsum dolor sit amet, consectetur.
-            ЯLorem ipsum dolor sit amet, consectetur.
-            ЯLorem ipsum dolor sit amet, consectetur.
-            ЯLorem ipsum dolor sit amet, consectetur.
-          </Card>
-        </CardGrid>
-        <List>
-            <Checkbox>ЯLorem ipsum dolor sit amet, consectetur.</Checkbox>
-            <Checkbox>ЯLorem ipsum dolor sit amet, consectetur.</Checkbox>
-            <Checkbox>ЯLorem ipsum dolor sit amet, consectetur.</Checkbox>
-            <Checkbox>ЯLorem ipsum dolor sit amet, consectetur.</Checkbox>
-        </List>
-        <List>
-            <Radio name="radio" value="1" description="Lorem ipsum dolor sit amet, consectetur." defaultChecked>First</Radio>
-            <Radio name="radio" value="2" description="Lorem ipsum dolor sit amet, consectetur." defaultChecked>First</Radio>
-            <Radio name="radio" value="3" description="Lorem ipsum dolor sit amet, consectetur." defaultChecked>First</Radio>
-            <Radio name="radio" value="4" description="Lorem ipsum dolor sit amet, consectetur." defaultChecked>First</Radio>
-        </List>
-        <FormLayout>
-            <FormLayoutGroup top="Ответ">
-                <Input type="text" align="center" />
-            </FormLayoutGroup>
-        </FormLayout>
+        {run && typeof questionIndex == 'number' &&
+            <Div>
+                <CardGrid style={{ margin : 20 }}>
+                    <Card style={{ padding : 20 }} size="xl" mode="shadow">
+                        {run.questions[questionIndex].text}
+                    </Card>
+                </CardGrid>
+                {run.questions[questionIndex].type != CONST.QUESTION_TYPE.TEXT &&
+                    <List>
+                        {run.questions[questionIndex].type == CONST.QUESTION_TYPE.MULTIPLE_CHOISES ?
+                            run.questions[questionIndex].options.map((a, i) => (<Checkbox key={i}>{a}</Checkbox>)) :
+                            run.questions[questionIndex].options.map((a, i) => (<Radio key={i}>{a}</Radio>))
+                        }
+                    </List>
+                }
 
-        <Div>
-            <Button size="xl">Primary</Button>
-        </Div>
+                {run.questions[questionIndex].type == CONST.QUESTION_TYPE.TEXT &&
+                    <FormLayout>
+                        <FormLayoutGroup top="Ответ">
+                            <Input type="text" align="center" />
+                        </FormLayoutGroup>
+                    </FormLayout>
+                }
+
+                <Div>
+                    <Button size="xl" onClick={onClickBtnAnswer}>Primary</Button>
+                </Div>
+            </Div>
+        }
 	</Panel>
 );
 
