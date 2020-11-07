@@ -24,7 +24,7 @@ const Quiz = ({ id, go, run, fetchedUser, questionIndex, onClickBtnAnswer, onCha
             <Div>
                 <CardGrid style={{ margin : 20 }}>
                     <Card style={{ padding : 20 }} size="xl" mode="shadow">
-                        {run.questions[questionIndex].text}
+                        <Div dangerouslySetInnerHTML={{__html: run.questions[questionIndex].text}}></Div>
                     </Card>
                 </CardGrid>
                 {run.questions[questionIndex].type != CONST.QUESTION_TYPE.TEXT &&
