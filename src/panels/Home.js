@@ -15,7 +15,7 @@ import Card from '@vkontakte/vkui/dist/components/Card/Card';
 const Home = ({ id, go, fetchedUser }) => (
 	<Panel id={id}>
 		<PanelHeader
-			left={<Avatar/>}>
+			left={fetchedUser && <Avatar src={fetchedUser.photo_100}/>}>
 			<PanelHeaderContent>
 				<Search />
 			</PanelHeaderContent>
