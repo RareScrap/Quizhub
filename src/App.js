@@ -23,6 +23,8 @@ const App = () => {
 	const [quizzes, setQuizes] = useState(null);
 	const [run, setRun] = useState(null);
 	const [questionIndex, setQuestionIndex] = useState(null);
+	const [answerButtonEnabled, setAnswerButtonEnabled] = useState(false);
+	const [score, setScore] = useState(null);
 	const [stats, setStats] = useState(null);
 
 	useEffect(() => {
@@ -81,16 +83,53 @@ const App = () => {
 		}
 	}
 
+	const onChangeQuestionCheckBox = e => {
+		let question = run.questions[questionIndex];
+		if (!question.answer)
+			question.setAnswer([]);
+		let index = +e.currentTarget.dataset.index;
+		if (e.currentTarget.checked) {
+			if (!question.answer.some(a => a == index)) {
+				question.answer.push(index);
+				question.setAnswer(question.answer);
+			}
+		} else {
+			question.setAnswer(question.answer.filter(a => a != index));
+		}
+
+		setAnswerButtonEnabled(question.answer.length > 0);
+	}
+
+	const onChangeQuestionRadio = e => {
+		let question = run.questions[questionIndex];
+		question.setAnswer(+e.currentTarget.dataset.index);
+
+		setAnswerButtonEnabled(true);
+	}
+
+	const onChangeQuestionText = e => {
+		let question = run.questions[questionIndex];
+		question.setAnswer(e.currentTarget.value);
+
+		setAnswerButtonEnabled(question.answer);
+	}
+
 	const onClickBtnAnswer = e => {
 		if (!run || typeof questionIndex != 'number')
 			return;
 
-		//run.questions[questionIndex].answer([0]); // TODO атвет
 		if (questionIndex + 1 >= run.questions.length) {
+			setScore(null);
 			setActivePanel('score');
+			setPopout(POPOUT_BLYAT);
+			run.end().then(response => {
+				setScore(response);
+				setPopout(null);
+			});
 		} else {
 			setQuestionIndex(questionIndex + 1);
-		} 
+			setAnswerButtonEnabled(false);
+		}
 	}
 
 	const onClickProfile = e => {
@@ -106,7 +145,7 @@ const App = () => {
 		<View activePanel={activePanel} popout={popout}>
 			<Home id='home' fetchedUser={fetchedUser} go={go} onClickCategory={onClickCategory} onClickProfile={onClickProfile} categories={categories} />
 			<QuizList id='quiz_list' go={go} onClickQuiz={onClickQuiz} quizzes={quizzes}/>
-			<Quiz id='run' fetchedUser={fetchedUser} run={run} questionIndex={questionIndex} setQuestionIndex={setQuestionIndex} go={go} onClickBtnAnswer={onClickBtnAnswer} />
+			<Quiz id='run' fetchedUser={fetchedUser} run={run} questionIndex={questionIndex} setQuestionIndex={setQuestionIndex} go={go} onClickBtnAnswer={onClickBtnAnswer} onChangeQuestionCheckBox={onChangeQuestionCheckBox} onChangeQuestionRadio={onChangeQuestionRadio} onChangeQuestionText={onChangeQuestionText} answerButtonEnabled={answerButtonEnabled} />
 			<Score id='score' fetchedUser={fetchedUser} go={go} />
 			<Stats id='stats' fetchedUser={fetchedUser} go={go} stats={stats}/>
 			<Persik id='persik' go={go} />

@@ -15,7 +15,7 @@ import Button from '@vkontakte/vkui/dist/components/Button/Button';
 import Div from '@vkontakte/vkui/dist/components/Div/Div';
 import CONST from '../QuizHub-Network-Bridge/const';
 
-const Quiz = ({ id, go, run, fetchedUser, questionIndex, onClickBtnAnswer}) => (
+const Quiz = ({ id, go, run, fetchedUser, questionIndex, onClickBtnAnswer, onChangeQuestionCheckBox, onChangeQuestionRadio, onChangeQuestionText, answerButtonEnabled}) => (
 	<Panel id={id}>
         <PanelHeader left={<PanelHeaderBack/>} right={run && ((typeof questionIndex == 'number' ? questionIndex : '-') + '/' + run.questions.length)} separator={true}>
             {run && run.quiz.title}
@@ -30,8 +30,8 @@ const Quiz = ({ id, go, run, fetchedUser, questionIndex, onClickBtnAnswer}) => (
                 {run.questions[questionIndex].type != CONST.QUESTION_TYPE.TEXT &&
                     <List>
                         {run.questions[questionIndex].type == CONST.QUESTION_TYPE.MULTIPLE_CHOISES ?
-                            run.questions[questionIndex].options.map((a, i) => (<Checkbox key={i}>{a}</Checkbox>)) :
-                            run.questions[questionIndex].options.map((a, i) => (<Radio key={i}>{a}</Radio>))
+                            run.questions[questionIndex].options.map((a, i) => (<Checkbox key={i} onChange={onChangeQuestionCheckBox} data-index={i}>{a}</Checkbox>)) :
+                            run.questions[questionIndex].options.map((a, i) => (<Radio name='no fun allowed names here' key={i} onChange={onChangeQuestionRadio} data-index={i}>{a}</Radio>))
                         }
                     </List>
                 }
@@ -39,13 +39,13 @@ const Quiz = ({ id, go, run, fetchedUser, questionIndex, onClickBtnAnswer}) => (
                 {run.questions[questionIndex].type == CONST.QUESTION_TYPE.TEXT &&
                     <FormLayout>
                         <FormLayoutGroup top="Ответ">
-                            <Input type="text" align="center" />
+                            <Input type="text" align="center" onChange={onChangeQuestionText} />
                         </FormLayoutGroup>
                     </FormLayout>
                 }
 
                 <Div>
-                    <Button size="xl" onClick={onClickBtnAnswer}>Primary</Button>
+                    <Button size="xl" disabled={!answerButtonEnabled} onClick={onClickBtnAnswer}>Primary</Button>
                 </Div>
             </Div>
         }
