@@ -7,10 +7,57 @@ import Group from '@vkontakte/vkui/dist/components/Group/Group';
 import Cell from '@vkontakte/vkui/dist/components/Cell/Cell';
 import Div from '@vkontakte/vkui/dist/components/Div/Div';
 import Avatar from '@vkontakte/vkui/dist/components/Avatar/Avatar';
+import Search from '@vkontakte/vkui/dist/components/Search/Search';
+import PanelHeaderContent from '@vkontakte/vkui/dist/components/PanelHeaderContent/PanelHeaderContent';
+import CardGrid from '@vkontakte/vkui/dist/components/CardGrid/CardGrid';
+import Card from '@vkontakte/vkui/dist/components/Card/Card';
 
 const Home = ({ id, go, fetchedUser }) => (
 	<Panel id={id}>
-		<PanelHeader>Example</PanelHeader>
+		<PanelHeader
+			left={<Avatar/>}>
+			<PanelHeaderContent>
+				<Search />
+			</PanelHeaderContent>
+		</PanelHeader>
+
+		<Group separator="hide">
+			<CardGrid>
+				<Card size="s">
+				<div style={{ height: 96 }} />
+				</Card>
+				<Card size="s">
+				<div style={{ height: 96 }} />
+				</Card>
+				<Card size="s">
+				<div style={{ height: 96 }} />
+				</Card>
+			</CardGrid>
+			<CardGrid>
+				<Card size="s">
+				<div style={{ height: 96 }} />
+				</Card>
+				<Card size="s">
+				<div style={{ height: 96 }} />
+				</Card>
+				<Card size="s">
+				<div style={{ height: 96 }} />
+				</Card>
+			</CardGrid>
+			<CardGrid>
+				<Card size="s">
+				<div style={{ height: 96 }} />
+				</Card>
+				<Card size="s">
+				<div style={{ height: 96 }} />
+				</Card>
+				<Card size="s">
+				<div style={{ height: 96 }} />
+				</Card>
+			</CardGrid>
+		</Group>
+
+{/* 
 		{fetchedUser &&
 		<Group title="User Data Fetched with VK Bridge">
 			<Cell
@@ -27,7 +74,7 @@ const Home = ({ id, go, fetchedUser }) => (
 					Show me the Persik, please
 				</Button>
 			</Div>
-		</Group>
+		</Group>	 */}
 	</Panel>
 );
 
