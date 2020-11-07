@@ -19,15 +19,28 @@ const QuizList = ({ id, go, onClickQuiz, fetchedUser, quizzes, onChangeSearchQui
         </PanelHeader>
         <List>
             {quizzes && quizzes.filter(anime => !searchQuizzes || anime.title.toLowerCase().includes(searchQuizzes.toLowerCase())).map(quiz => (
-                <Cell key={quiz.id} onClick={onClickQuiz} data-id={quiz.id}>{quiz.title}
+                <Cell key={quiz.id} onClick={quiz.run && quiz.run.cooldownAt > new Date().getTime() / 1000 ? null : onClickQuiz} data-id={quiz.id} >
+                <span style={ quiz.run && quiz.run.cooldownAt > new Date().getTime() / 1000 ? { color : 'lightgray'} : {}}>{
+                    quiz.title
+                }</span>
                 <span style={{ float : 'right', color : 'gray'}}>{
-                    quiz.run ? quiz.cooldownAt : 'Cложность ' + '💣'.repeat(quiz.difficulty)
+                    quiz.run && quiz.run.cooldownAt > new Date().getTime() / 1000 ? 'Будет доступна ' + formatTime(new Date(quiz.run.cooldownAt * 1000)) : 'Cложность ' + '💣'.repeat(quiz.difficulty)
                 }</span>
                 </Cell>
             ))}
         </List>
 	</Panel>
 );
+
+function formatTime(date = new Date()) {
+    var result = 'в ';
+    if (date.getHours() < 10) result += '0';
+    result += date.getHours() + ':';
+    if (date.getMinutes() < 10) result += '0';
+    result += date.getMinutes();
+
+    return result;
+}
 
 QuizList.propTypes = {
 	id: PropTypes.string.isRequired,
