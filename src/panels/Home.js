@@ -34,18 +34,12 @@ const Home = ({ id, go, fetchedUser, categories }) => (
 					return resultArray
 				}, []).map(row => (
 					<CardGrid>
-						<Card size="s">
-							<img style={{ height: 96 }} src={row[0].imgUrl} />
-							<h1>{row[0].name}</h1>
-						</Card>
-						{row.length > 1 && <Card size="s">
-							<img style={{ height: 96 }} src={row[1].imgUrl} />
-							<h1>{row[0].name}</h1>
-						</Card>}
-						{row.length > 2 && <Card size="s">
-							<img style={{ height: 96 }} src={row[2].imgUrl} />
-							<h1>{row[0].name}</h1>
-						</Card>}
+						{row.map(category => (
+							<Card size="s">
+								<img style={{ height: 96 }} src={category.imgUrl} />
+								<h1>{category.name}</h1>
+							</Card>
+						))}
 					</CardGrid>
 				))}
 		</Group>
