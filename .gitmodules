@@ -1,0 +1,3 @@
+[submodule "src/QuizHub-Network-Bridge"]
+	path = src/QuizHub-Network-Bridge
+	url = https://github.com/NikolayNIK/QuizHub-Network-Bridge
