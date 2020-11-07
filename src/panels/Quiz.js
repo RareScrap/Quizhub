@@ -17,7 +17,7 @@ import CONST from '../QuizHub-Network-Bridge/const';
 
 const Quiz = ({ id, go, run, fetchedUser, questionIndex, onClickBtnAnswer, onChangeQuestionCheckBox, onChangeQuestionRadio, onChangeQuestionText, answerButtonEnabled}) => (
 	<Panel id={id}>
-        <PanelHeader left={<PanelHeaderBack onClick={go} data-to="quiz_list"/>} right={run && ((typeof questionIndex == 'number' ? questionIndex : '-') + '/' + run.questions.length)} separator={true}>
+        <PanelHeader left={<PanelHeaderBack onClick={go} data-to="quiz_list"/>} right={run && ((typeof questionIndex == 'number' ? questionIndex + 1 : '-') + '/' + run.questions.length)} separator={true}>
             {run && run.quiz.title}
         </PanelHeader>
         {run && typeof questionIndex == 'number' &&
@@ -30,8 +30,8 @@ const Quiz = ({ id, go, run, fetchedUser, questionIndex, onClickBtnAnswer, onCha
                 {run.questions[questionIndex].type != CONST.QUESTION_TYPE.TEXT &&
                     <List>
                         {run.questions[questionIndex].type == CONST.QUESTION_TYPE.MULTIPLE_CHOISES ?
-                            run.questions[questionIndex].options.map((a, i) => (<Checkbox key={i} onChange={onChangeQuestionCheckBox} data-index={i}>{a}</Checkbox>)) :
-                            run.questions[questionIndex].options.map((a, i) => (<Radio name='no fun allowed names here' key={i} onChange={onChangeQuestionRadio} data-index={i}>{a}</Radio>))
+                            run.questions[questionIndex].options.map((a, i) => (<Checkbox key={i + 10 * questionIndex} onChange={onChangeQuestionCheckBox} data-index={i} checked={run.questions[questionIndex].answer && run.questions[questionIndex].answer.includes(i)}>{a}</Checkbox>)) :
+                            run.questions[questionIndex].options.map((a, i) => (<Radio name='no fun allowed names here' key={i + 10 * questionIndex} onChange={onChangeQuestionRadio} data-index={i} checked={run.questions[questionIndex].answer == i}>{a}</Radio>))
                         }
                     </List>
                 }
