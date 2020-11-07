@@ -22,6 +22,8 @@ const App = () => {
 	const [categories, setCategories] = useState(null);
 	const [quizzes, setQuizes] = useState(null);
 	const [stats, setStats] = useState(null);
+	const [coupons, setCoupons] = useState(null);
+	const [discounts, setDiscounts] = useState(null);
 
 	useEffect(() => {
 		bridge.subscribe(({ detail: { type, data }}) => {
@@ -70,11 +72,51 @@ const App = () => {
 		})
 	}
 
+	const onClickBuyCoupons = e => {
+		setPopout(POPOUT_BLYAT);
+		api.getCoupons().then(netCoupons => {
+		
+			api.getDiscounts().then(netDiscount => {
+				setCoupons(netCoupons)
+				setDiscounts(netDiscount)
+				setActivePanel('shop');
+				setPopout(null);
+			})
+		})
+	}
+
+	const onBuyDiscount = e => {
+		api.getStats().then(newStats => {
+			setStats(newStats)
+		})
+
+		let id = +e.currentTarget.dataset.id;
+		for (let i = 0; i < discounts.discounts.length; i++) {
+			let discount = discounts.discounts[i];
+			if (discount.id === id) {
+				setPopout(POPOUT_BLYAT);
+
+				discount.generateCoupon().then((newCoupon) => {
+					const newCoupons = coupons
+					newCoupons.coupons.push(newCoupon.coupon)
+					setCoupons(newCoupons)
+					setPopout(null)
+					this.forceUpdate()
+				}).catch((error) => {
+					console.error(error)
+				})
+
+				break;
+			}
+		}
+	}
+
 	return (
 		<View activePanel={activePanel} popout={popout}>
 			<Home id='home' fetchedUser={fetchedUser} go={go} onClickCategory={onClickCategory} onClickProfile={onClickProfile} categories={categories} />
 			<QuizList id='quiz_list' go={go} quizzes={quizzes}/>
-			<Stats id='stats' fetchedUser={fetchedUser} go={go} stats={stats}/>
+			<Stats id='stats' fetchedUser={fetchedUser} go={go} onClickBuyCoupons={onClickBuyCoupons} stats={stats}/>
+			<Shop id='shop'  go={go} coupons={coupons} discounts={discounts} stats={stats} onBuyDiscount={onBuyDiscount}/>
 			<Persik id='persik' go={go}/>
 		</View>
 	);

@@ -23,42 +23,47 @@ import { Avatar } from '@vkontakte/vkui';
 import './Shop.css';
 
 
-const Shop = ({ id, go, fetchedUser }) => (
+const Shop = ({ id, go, coupons, discounts, stats, onBuyDiscount }) => (
 	<Panel id={id}>
-        <PanelHeader left={<PanelHeaderBack/>} separator={false}>
+        <PanelHeader left={<PanelHeaderBack onClick={go} data-to="stats"/>} separator={false}>
             Купоны
         </PanelHeader>
 
         <img id="shop_coin_logo" src="https://art.pixilart.com/7736b1d30d303e4.gif" alt="альтернативный текст"/>
-        <p id="ebal_label">5928 эбалов</p>
+        <p id="ebal_label">{stats.balance} баллов</p>
 
+        {coupons && coupons.coupons.length != 0 &&
         <Group>
             <Header mode="secondary">Купленные купоны</Header>
+            {coupons && coupons.coupons.map(coupon => (
             <RichCell
                 disabled
                 multiline
-                before={<img className="Book" src="https://i.pinimg.com/originals/3c/7a/f3/3c7af3c03a1fc34f679d6cb8d1af703a.png"/>}
-                text="-10% в МирКниг"
-                caption="На книги по строительству и программированию"
-                after="Код: asdewgoidfosdfre"
+                before={<img className="Book" src={coupon.discount.shop.imgUrl} style={{ width : '15%', margin : '16px', borderRadius: '6px' }}/>}
+                text={coupon.discount.title}
+                caption={coupon.discount.shop.name}
+                after={"Код: " + coupon.coupon}
             />
+            ))}
         </Group>
-
+        }
 
         <Group>
             <Header mode="secondary">Доступные</Header>
+            {discounts && discounts.discounts.map(discount => (
             <RichCell
                 disabled
                 multiline
-                before={<img className="Book" src="https://i.pinimg.com/originals/3c/7a/f3/3c7af3c03a1fc34f679d6cb8d1af703a.png"/>}
-                text="-10% в МирКниг"
-                caption="На книги по строительству и программированию"
+                before={<img className="Book" src={discount.shop.imgUrl} style={{ width : '15%', margin : '16px', borderRadius: '6px' }}/>}
+                text={discount.title}
+                caption={discount.shop.name}
                 actions={
                 <React.Fragment>
-                    <Button>350 э-балов</Button>
+                    <Button disabled={discount.price > stats.balance} onClick={onBuyDiscount} data-id={discount.id}>{"Купить купон за " + discount.price +" баллов"}</Button>
                 </React.Fragment>
                 }
             />
+            ))}
         </Group>
 
 	</Panel>

@@ -23,7 +23,7 @@ import api from '../QuizHub-Network-Bridge/importme'
 
 import './Stats.css';
 
-const Stats = ({ id, go, fetchedUser, stats }) => (
+const Stats = ({ id, go, fetchedUser, onClickBuyCoupons, stats }) => (
 	<Panel id={id}>
         <PanelHeader left={<PanelHeaderBack/>} separator={false} onClick={go} data-to="home">
             Статистика
@@ -37,7 +37,7 @@ const Stats = ({ id, go, fetchedUser, stats }) => (
             <img id="stats_coin_logo" src="https://art.pixilart.com/7736b1d30d303e4.gif"/>
         </p>
         <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', marginTop: '-1cm' }}>
-            <Button>Обменять на купоны</Button>
+            <Button onClick={onClickBuyCoupons} data-to="shop">Обменять на купоны</Button>
         </div>
 
         {stats && 
