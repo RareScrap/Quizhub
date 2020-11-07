@@ -21,6 +21,10 @@ const App = () => {
 	const [popout, setPopout] = useState(POPOUT_BLYAT);
 	const [categories, setCategories] = useState(null);
 	const [quizzes, setQuizes] = useState(null);
+	const [run, setRun] = useState(null);
+	const [questionIndex, setQuestionIndex] = useState(null);
+	const [answerButtonEnabled, setAnswerButtonEnabled] = useState(false);
+	const [score, setScore] = useState(null);
 	const [stats, setStats] = useState(null);
 	const [coupons, setCoupons] = useState(null);
 	const [discounts, setDiscounts] = useState(null);
@@ -52,6 +56,7 @@ const App = () => {
 		for (let i = 0; i < categories.length; i++) {
 			let category = categories[i];
 			if (category.id === id) {
+				setQuizes(null);
 				setPopout(POPOUT_BLYAT);
 				setActivePanel('quiz_list');
 				category.getQuizzes().then(shit => {
@@ -60,6 +65,72 @@ const App = () => {
 				});
 				break;
 			}
+		}
+	}
+
+	const onClickQuiz = e => {
+		let id = +e.currentTarget.dataset.id;
+		for (let i = 0; i < quizzes.length; i++) {
+			let quiz = quizzes[i];
+			if (quiz.id === id) {
+				setRun(null);
+				setPopout(POPOUT_BLYAT);
+				setActivePanel('run');
+				quiz.start().then(run => {
+					setRun(run);
+					setQuestionIndex(0);
+					setPopout(null);
+				})
+			}
+		}
+	}
+
+	const onChangeQuestionCheckBox = e => {
+		let question = run.questions[questionIndex];
+		if (!question.answer)
+			question.setAnswer([]);
+		let index = +e.currentTarget.dataset.index;
+		if (e.currentTarget.checked) {
+			if (!question.answer.some(a => a == index)) {
+				question.answer.push(index);
+				question.setAnswer(question.answer);
+			}
+		} else {
+			question.setAnswer(question.answer.filter(a => a != index));
+		}
+
+		setAnswerButtonEnabled(question.answer.length > 0);
+	}
+
+	const onChangeQuestionRadio = e => {
+		let question = run.questions[questionIndex];
+		question.setAnswer(+e.currentTarget.dataset.index);
+
+		setAnswerButtonEnabled(true);
+	}
+
+	const onChangeQuestionText = e => {
+		let question = run.questions[questionIndex];
+		question.setAnswer(e.currentTarget.value);
+
+		setAnswerButtonEnabled(question.answer);
+	}
+
+	const onClickBtnAnswer = e => {
+		if (!run || typeof questionIndex != 'number')
+			return;
+
+		if (questionIndex + 1 >= run.questions.length) {
+			setScore(null);
+			setActivePanel('score');
+			setPopout(POPOUT_BLYAT);
+			run.end().then(response => {debugger;
+				setScore(response);
+				setPopout(null);
+			});
+		} else {
+			setQuestionIndex(questionIndex + 1);
+			setAnswerButtonEnabled(false);
 		}
 	}
 
@@ -114,10 +185,11 @@ const App = () => {
 	return (
 		<View activePanel={activePanel} popout={popout}>
 			<Home id='home' fetchedUser={fetchedUser} go={go} onClickCategory={onClickCategory} onClickProfile={onClickProfile} categories={categories} />
-			<QuizList id='quiz_list' go={go} quizzes={quizzes}/>
 			<Stats id='stats' fetchedUser={fetchedUser} go={go} onClickBuyCoupons={onClickBuyCoupons} stats={stats}/>
 			<Shop id='shop'  go={go} coupons={coupons} discounts={discounts} stats={stats} onBuyDiscount={onBuyDiscount}/>
-			<Persik id='persik' go={go}/>
+			<QuizList id='quiz_list' go={go} onClickQuiz={onClickQuiz} quizzes={quizzes}/>
+			<Quiz id='run' fetchedUser={fetchedUser} run={run} questionIndex={questionIndex} setQuestionIndex={setQuestionIndex} go={go} onClickBtnAnswer={onClickBtnAnswer} onChangeQuestionCheckBox={onChangeQuestionCheckBox} onChangeQuestionRadio={onChangeQuestionRadio} onChangeQuestionText={onChangeQuestionText} answerButtonEnabled={answerButtonEnabled} />
+			<Score id='score' fetchedUser={fetchedUser} go={go} score={score}/>
 		</View>
 	);
 }

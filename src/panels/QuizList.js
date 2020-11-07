@@ -8,7 +8,7 @@ import Cell from '@vkontakte/vkui/dist/components/Cell/Cell';
 import Avatar from '@vkontakte/vkui/dist/components/Avatar/Avatar';
 import PanelHeader from '@vkontakte/vkui/dist/components/PanelHeader/PanelHeader';
 
-const QuizList = ({ id, go, fetchedUser, quizzes }) => (
+const QuizList = ({ id, go, onClickQuiz, fetchedUser, quizzes }) => (
 	<Panel id={id}>
         <PanelHeader left={<PanelHeaderBack onClick={go} data-to="home"/>} separator={false}>
             <Search
@@ -19,7 +19,7 @@ const QuizList = ({ id, go, fetchedUser, quizzes }) => (
         </PanelHeader>
         <List>
             {quizzes && quizzes.map(quiz => (
-                <Cell>{quiz.title}</Cell>
+                <Cell key={quiz.id} onClick={onClickQuiz} data-id={quiz.id}>{quiz.title}</Cell>
             ))}
         </List>
 	</Panel>
