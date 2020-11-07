@@ -36,8 +36,8 @@ const Home = ({ id, go, onClickCategory, onClickProfile, fetchedUser, categories
 					<CardGrid>
 						{row.map(category => (
 							<Card key={category.id} size="s" onClick={onClickCategory} data-id={category.id}>
-								<img style={{ height: 96, borderRadius: 'inherit' }} src={category.imgUrl} />
-								<h1>{category.name}</h1>
+								<img style={{ width : '100%', objectFit: 'cover' , height: 96, borderRadius: 'inherit' }} src={category.imgUrl} />
+								<Cell>{category.name}</Cell> {/* Нам просто нравится шрифт в cell и нам лень смотреть его ксс */}
 							</Card>
 						))}
 					</CardGrid>
