@@ -12,7 +12,7 @@ import PanelHeaderContent from '@vkontakte/vkui/dist/components/PanelHeaderConte
 import CardGrid from '@vkontakte/vkui/dist/components/CardGrid/CardGrid';
 import Card from '@vkontakte/vkui/dist/components/Card/Card';
 
-const Home = ({ id, go, fetchedUser, categories }) => (
+const Home = ({ id, go, onClickCategory, fetchedUser, categories }) => (
 	<Panel id={id}>
 		<PanelHeader
 			left={fetchedUser && <Avatar src={fetchedUser.photo_100}/>}>
@@ -35,7 +35,7 @@ const Home = ({ id, go, fetchedUser, categories }) => (
 				}, []).map(row => (
 					<CardGrid>
 						{row.map(category => (
-							<Card size="s">
+							<Card size="s" onClick={onClickCategory} data-id={category.id}>
 								<img style={{ height: 96 }} src={category.imgUrl} />
 								<h1>{category.name}</h1>
 							</Card>

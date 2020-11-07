@@ -8,9 +8,9 @@ import Cell from '@vkontakte/vkui/dist/components/Cell/Cell';
 import Avatar from '@vkontakte/vkui/dist/components/Avatar/Avatar';
 import PanelHeader from '@vkontakte/vkui/dist/components/PanelHeader/PanelHeader';
 
-const QuizlList = ({ id, go, fetchedUser }) => (
+const QuizList = ({ id, go, fetchedUser, quizzes }) => (
 	<Panel id={id}>
-        <PanelHeader left={<PanelHeaderBack/>} separator={false}>
+        <PanelHeader left={<PanelHeaderBack onClick={go} data-to="home"/>} separator={false}>
             <Search
                 //value="asd"
                 //onChange={this.onChange}
@@ -18,18 +18,14 @@ const QuizlList = ({ id, go, fetchedUser }) => (
             />
         </PanelHeader>
         <List>
-            <Cell>Тест</Cell>
-            <Cell>Тест</Cell>
-            <Cell>Тест</Cell>
-            <Cell>Тест</Cell>
-            <Cell>Тест</Cell>
-            <Cell>Тест</Cell>
-            <Cell>Тест</Cell>
+            {quizzes && quizzes.map(quiz => (
+                <Cell>{quiz.title}</Cell>
+            ))}
         </List>
 	</Panel>
 );
 
-QuizlList.propTypes = {
+QuizList.propTypes = {
 	id: PropTypes.string.isRequired,
 	go: PropTypes.func.isRequired,
 	fetchedUser: PropTypes.shape({
@@ -42,4 +38,4 @@ QuizlList.propTypes = {
 	}),
 };
 
-export default QuizlList;
+export default QuizList;

@@ -13,11 +13,14 @@ import Stats from './panels/Stats';
 import Shop from './panels/Shop';
 import Persik from './panels/Persik';
 
+const POPOUT_BLYAT = <ScreenSpinner size='large'/>;
+
 const App = () => {
 	const [activePanel, setActivePanel] = useState('home');
 	const [fetchedUser, setUser] = useState(null);
-	const [popout, setPopout] = useState(<ScreenSpinner size='large' />);
+	const [popout, setPopout] = useState(POPOUT_BLYAT);
 	const [categories, setCategories] = useState(null);
+	const [quizzes, setQuizes] = useState(null);
 
 	useEffect(() => {
 		bridge.subscribe(({ detail: { type, data }}) => {
@@ -41,9 +44,26 @@ const App = () => {
 		setActivePanel(e.currentTarget.dataset.to);
 	};
 
+	const onClickCategory = e => {
+		let id = +e.currentTarget.dataset.id;
+		for (let i = 0; i < categories.length; i++) {
+			let category = categories[i];
+			if (category.id === id) {
+				setPopout(POPOUT_BLYAT);
+				setActivePanel('quiz_list');
+				category.getQuizzes().then(shit => {
+					setQuizes(shit);
+					setPopout(null);
+				});
+				break;
+			}
+		}
+	}
+
 	return (
 		<View activePanel={activePanel} popout={popout}>
-			<Home id='home' fetchedUser={fetchedUser} go={go} categories={categories} />
+			<Home id='home' fetchedUser={fetchedUser} go={go} onClickCategory={onClickCategory} categories={categories} />
+			<QuizList id='quiz_list' go={go} quizzes={quizzes}/>
 			<Persik id='persik' go={go} />
 		</View>
 	);
