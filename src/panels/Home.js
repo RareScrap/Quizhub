@@ -12,7 +12,7 @@ import PanelHeaderContent from '@vkontakte/vkui/dist/components/PanelHeaderConte
 import CardGrid from '@vkontakte/vkui/dist/components/CardGrid/CardGrid';
 import Card from '@vkontakte/vkui/dist/components/Card/Card';
 
-const Home = ({ id, go, fetchedUser }) => (
+const Home = ({ id, go, fetchedUser, categories }) => (
 	<Panel id={id}>
 		<PanelHeader
 			left={fetchedUser && <Avatar src={fetchedUser.photo_100}/>}>
@@ -22,39 +22,32 @@ const Home = ({ id, go, fetchedUser }) => (
 		</PanelHeader>
 
 		<Group separator="hide">
-			<CardGrid>
-				<Card size="s">
-				<div style={{ height: 96 }} />
-				</Card>
-				<Card size="s">
-				<div style={{ height: 96 }} />
-				</Card>
-				<Card size="s">
-				<div style={{ height: 96 }} />
-				</Card>
-			</CardGrid>
-			<CardGrid>
-				<Card size="s">
-				<div style={{ height: 96 }} />
-				</Card>
-				<Card size="s">
-				<div style={{ height: 96 }} />
-				</Card>
-				<Card size="s">
-				<div style={{ height: 96 }} />
-				</Card>
-			</CardGrid>
-			<CardGrid>
-				<Card size="s">
-				<div style={{ height: 96 }} />
-				</Card>
-				<Card size="s">
-				<div style={{ height: 96 }} />
-				</Card>
-				<Card size="s">
-				<div style={{ height: 96 }} />
-				</Card>
-			</CardGrid>
+			{categories && categories.reduce((resultArray, item, index) => { 
+					const chunkIndex = Math.floor(index/3)
+
+					if(!resultArray[chunkIndex]) {
+						resultArray[chunkIndex] = [] // start a new chunk
+					}
+
+					resultArray[chunkIndex].push(item)
+
+					return resultArray
+				}, []).map(row => (
+					<CardGrid>
+						<Card size="s">
+							<img style={{ height: 96 }} src={row[0].imgUrl} />
+							<h1>{row[0].name}</h1>
+						</Card>
+						{row.length > 1 && <Card size="s">
+							<img style={{ height: 96 }} src={row[1].imgUrl} />
+							<h1>{row[0].name}</h1>
+						</Card>}
+						{row.length > 2 && <Card size="s">
+							<img style={{ height: 96 }} src={row[2].imgUrl} />
+							<h1>{row[0].name}</h1>
+						</Card>}
+					</CardGrid>
+				))}
 		</Group>
 
 {/* 

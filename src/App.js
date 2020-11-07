@@ -4,6 +4,7 @@ import View from '@vkontakte/vkui/dist/components/View/View';
 import ScreenSpinner from '@vkontakte/vkui/dist/components/ScreenSpinner/ScreenSpinner';
 import '@vkontakte/vkui/dist/vkui.css';
 
+import api from './QuizHub-Network-Bridge/importme';
 import Home from './panels/Home';
 import QuizList from './panels/QuizList';
 import Quiz from './panels/Quiz';
@@ -15,6 +16,7 @@ const App = () => {
 	const [activePanel, setActivePanel] = useState('home');
 	const [fetchedUser, setUser] = useState(null);
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />);
+	const [categories, setCategories] = useState(null);
 
 	useEffect(() => {
 		bridge.subscribe(({ detail: { type, data }}) => {
@@ -30,6 +32,8 @@ const App = () => {
 			setPopout(null);
 		}
 		fetchData();
+
+		api.getCategories().then(setCategories);
 	}, []);
 
 	const go = e => {
@@ -38,7 +42,7 @@ const App = () => {
 
 	return (
 		<View activePanel={activePanel} popout={popout}>
-			<Home id='home' fetchedUser={fetchedUser} go={go} />
+			<Home id='home' fetchedUser={fetchedUser} go={go} categories={categories} />
 			<Persik id='persik' go={go} />
 		</View>
 	);
