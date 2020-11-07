@@ -35,6 +35,9 @@ const Stats = ({ id, go, fetchedUser }) => (
             <span id="all_ebals">5928 э-балов</span>
             <img id="stats_coin_logo" src="https://art.pixilart.com/7736b1d30d303e4.gif"/>
         </p>
+        <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', marginTop: '-1cm' }}>
+            <Button>Обменять на купоны</Button>
+        </div>
         <Group>
             <SimpleCell multiline>
             <InfoRow header="Пройдено за месяц">
