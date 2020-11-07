@@ -19,7 +19,11 @@ const QuizList = ({ id, go, onClickQuiz, fetchedUser, quizzes, onChangeSearchQui
         </PanelHeader>
         <List>
             {quizzes && quizzes.filter(anime => !searchQuizzes || anime.title.toLowerCase().includes(searchQuizzes.toLowerCase())).map(quiz => (
-                <Cell key={quiz.id} onClick={onClickQuiz} data-id={quiz.id}>{quiz.title}</Cell>
+                <Cell key={quiz.id} onClick={onClickQuiz} data-id={quiz.id}>{quiz.title}
+                <span style={{ float : 'right', color : 'gray'}}>{
+                    quiz.run ? quiz.cooldownAt : 'Cложность ' + '💣'.repeat(quiz.difficulty)
+                }</span>
+                </Cell>
             ))}
         </List>
 	</Panel>
