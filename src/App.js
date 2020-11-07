@@ -20,7 +20,9 @@ const App = () => {
 	const [fetchedUser, setUser] = useState(null);
 	const [popout, setPopout] = useState(POPOUT_BLYAT);
 	const [categories, setCategories] = useState(null);
+	const [searchCategories, setSearchCategories] = useState(null);
 	const [quizzes, setQuizes] = useState(null);
+	const [searchQuizzes, setSearchQuizzes] = useState(null);
 	const [run, setRun] = useState(null);
 	const [questionIndex, setQuestionIndex] = useState(null);
 	const [answerButtonEnabled, setAnswerButtonEnabled] = useState(false);
@@ -50,6 +52,19 @@ const App = () => {
 	const go = e => {
 		setActivePanel(e.currentTarget.dataset.to);
 	};
+
+	const onChangeSearchCategories = e => {
+		setSearchCategories(e.currentTarget.value);
+	};
+
+	const onChangeSearchQuizzes = e => {
+		setSearchQuizzes(e.currentTarget.value);
+	};
+
+	const onClickBtnQuizListBack = e => {
+		setSearchQuizzes(null);
+		setActivePanel('home');
+	}
 
 	const onClickCategory = e => {
 		let id = +e.currentTarget.dataset.id;
@@ -184,10 +199,10 @@ const App = () => {
 
 	return (
 		<View activePanel={activePanel} popout={popout}>
-			<Home id='home' fetchedUser={fetchedUser} go={go} onClickCategory={onClickCategory} onClickProfile={onClickProfile} categories={categories} />
+			<Home id='home' fetchedUser={fetchedUser} go={go} onClickCategory={onClickCategory} onClickProfile={onClickProfile} categories={categories} onChangeSearchCategories={onChangeSearchCategories} searchCategories={searchCategories} />
 			<Stats id='stats' fetchedUser={fetchedUser} go={go} onClickBuyCoupons={onClickBuyCoupons} stats={stats}/>
 			<Shop id='shop'  go={go} coupons={coupons} discounts={discounts} stats={stats} onBuyDiscount={onBuyDiscount}/>
-			<QuizList id='quiz_list' go={go} onClickQuiz={onClickQuiz} quizzes={quizzes}/>
+			<QuizList id='quiz_list' go={go} onClickQuiz={onClickQuiz} quizzes={quizzes} onChangeSearchQuizzes={onChangeSearchQuizzes} searchQuizzes={searchQuizzes} onClickBtnQuizListBack={onClickBtnQuizListBack}/>
 			<Quiz id='run' fetchedUser={fetchedUser} run={run} questionIndex={questionIndex} setQuestionIndex={setQuestionIndex} go={go} onClickBtnAnswer={onClickBtnAnswer} onChangeQuestionCheckBox={onChangeQuestionCheckBox} onChangeQuestionRadio={onChangeQuestionRadio} onChangeQuestionText={onChangeQuestionText} answerButtonEnabled={answerButtonEnabled} />
 			<Score id='score' fetchedUser={fetchedUser} go={go} score={score}/>
 		</View>
