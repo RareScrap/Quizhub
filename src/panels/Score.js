@@ -17,36 +17,41 @@ import Cell from '@vkontakte/vkui/dist/components/Cell/Cell';
 
 import './Score.css';
 
-const Score = ({ id, go, fetchedUser }) => (
+const Score = ({ id, go, fetchedUser, score }) => (
 	<Panel id={id}>
-        <PanelHeader left={<PanelHeaderBack/>} separator={true}>
+        <PanelHeader separator={true}>
             Результаты
         </PanelHeader>
 
-        <p id="score_label">Вы ответили верно на 5 из 10 вопросов и получили</p>
-        <img id="coin_logo" src="https://art.pixilart.com/7736b1d30d303e4.gif" alt="альтернативный текст"/>
-        <p id="ebal_label">5928 эбалов</p>
-        <p id="status_label">Отличная работа!</p>
+        {score &&
+            <Div>
+                <p id="score_label">Вы ответили верно на {score.rightAnswerCount} из {score.totalQuestionCount} вопросов и получили</p>
+                <img id="coin_logo" src="https://art.pixilart.com/7736b1d30d303e4.gif" alt="альтернативный текст"/>
+                <p id="ebal_label">{score.newEpoints} баллов</p>
+                <p id="status_label">Отличная работа!</p>
+                {score.rightAnswerCount < score.totalQuestionCount &&
+                    <Div>
+                        <p id="status_label">Эти книги помогут вам завершить викторину до конца</p>
+                        <List>
+                            {score.books.map(book => (
+                                <Cell className="BookCell">
+                                    <img className="Book" src={book.imgUrl}/>
+                                    <Div className="CellText">
+                                        <h3>{book.title}</h3>
+                                        <h4>{book.description}</h4>
+                                    </Div>
+                                    <Button size="m" className="BuyButton" href={book.url} target="_blank">Купить</Button>
+                                </Cell>
+                            ))}
+                        </List>
+                    </Div>
+                }
 
-        <p id="status_label">Эти книги помогут вам завершить викторину до конца</p>
-        <List>
-            <Cell className="BookCell">
-                
-                    <img className="Book" src="https://pbs.twimg.com/media/EBsOZOVXoAEz61S?format=jpg&name=medium"/>
-        
-                <Div className="CellText">
-                    <h3>Title</h3>
-                    <h4>Subtitle</h4>
+                <Div>
+                    <Button size="xl" onClick={go} data-to="home">Завершить</Button>
                 </Div>
-                <Button size="m" className="BuyButton">Купить</Button>
-            </Cell>
-        </List>
-
-        
-
-        <Div>
-            <Button size="xl">Завершить</Button>
-        </Div>
+            </Div>
+        }
 	</Panel>
 );
 

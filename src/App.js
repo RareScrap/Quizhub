@@ -122,7 +122,7 @@ const App = () => {
 			setScore(null);
 			setActivePanel('score');
 			setPopout(POPOUT_BLYAT);
-			run.end().then(response => {
+			run.end().then(response => {debugger;
 				setScore(response);
 				setPopout(null);
 			});
@@ -146,7 +146,7 @@ const App = () => {
 			<Home id='home' fetchedUser={fetchedUser} go={go} onClickCategory={onClickCategory} onClickProfile={onClickProfile} categories={categories} />
 			<QuizList id='quiz_list' go={go} onClickQuiz={onClickQuiz} quizzes={quizzes}/>
 			<Quiz id='run' fetchedUser={fetchedUser} run={run} questionIndex={questionIndex} setQuestionIndex={setQuestionIndex} go={go} onClickBtnAnswer={onClickBtnAnswer} onChangeQuestionCheckBox={onChangeQuestionCheckBox} onChangeQuestionRadio={onChangeQuestionRadio} onChangeQuestionText={onChangeQuestionText} answerButtonEnabled={answerButtonEnabled} />
-			<Score id='score' fetchedUser={fetchedUser} go={go} />
+			<Score id='score' fetchedUser={fetchedUser} go={go} score={score}/>
 			<Stats id='stats' fetchedUser={fetchedUser} go={go} stats={stats}/>
 			<Persik id='persik' go={go} />
 		</View>
