@@ -12,10 +12,10 @@ import PanelHeaderContent from '@vkontakte/vkui/dist/components/PanelHeaderConte
 import CardGrid from '@vkontakte/vkui/dist/components/CardGrid/CardGrid';
 import Card from '@vkontakte/vkui/dist/components/Card/Card';
 
-const Home = ({ id, go, onClickCategory, fetchedUser, categories }) => (
+const Home = ({ id, go, onClickCategory, onClickProfile, fetchedUser, categories }) => (
 	<Panel id={id}>
 		<PanelHeader
-			left={fetchedUser && <Avatar src={fetchedUser.photo_100} onClick={go} data-to="stats"/>}>
+			left={fetchedUser && <Avatar src={fetchedUser.photo_100} onClick={onClickProfile} data-to="stats"/>}>
 			<PanelHeaderContent>
 				<Search />
 			</PanelHeaderContent>

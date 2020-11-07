@@ -19,10 +19,11 @@ import Header from '@vkontakte/vkui/dist/components/Header/Header';
 import SimpleCell from '@vkontakte/vkui/dist/components/SimpleCell/SimpleCell';
 import InfoRow from '@vkontakte/vkui/dist/components/InfoRow/InfoRow';
 import { Avatar } from '@vkontakte/vkui';
+import api from '../QuizHub-Network-Bridge/importme'
 
 import './Stats.css';
 
-const Stats = ({ id, go, fetchedUser }) => (
+const Stats = ({ id, go, fetchedUser, stats }) => (
 	<Panel id={id}>
         <PanelHeader left={<PanelHeaderBack/>} separator={false} onClick={go} data-to="home">
             Статистика
@@ -32,29 +33,34 @@ const Stats = ({ id, go, fetchedUser }) => (
         </div>
         <p id="score_label">
             <img id="stats_coin_logo" src="https://art.pixilart.com/7736b1d30d303e4.gif"/>
-            <span id="all_ebals">5928 баллов</span>
+            <span id="all_ebals">{stats && stats.balance} баллов</span>
             <img id="stats_coin_logo" src="https://art.pixilart.com/7736b1d30d303e4.gif"/>
         </p>
         <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', marginTop: '-1cm' }}>
             <Button>Обменять на купоны</Button>
         </div>
+
+        {stats && 
         <Group>
-            <SimpleCell multiline>
-            <InfoRow header="Пройдено за месяц">
-                125 викторин
-            </InfoRow>
-            </SimpleCell>
-            <SimpleCell>
-            <InfoRow header="Пройдено за сегодня">
-                12 викторин
-            </InfoRow>
-            </SimpleCell>
-            <SimpleCell>
-            <InfoRow header="Любимая тема">
-                Девушки бодибилдеры 60-х
-            </InfoRow>
-            </SimpleCell>
+                <SimpleCell multiline>
+                    <InfoRow header="Пройдено за месяц">
+                        {stats.runsAtCurrentMonthCount} викторин
+                    </InfoRow>
+                </SimpleCell>
+
+                <SimpleCell>
+                    <InfoRow header="Пройдено всего">
+                        {stats.totalRunCount} викторин
+                    </InfoRow>
+                </SimpleCell>
+            
+                <SimpleCell>
+                    <InfoRow header="Любимая тема">
+                        {stats.favouriteCategoryName == "" ? "Пока нет" : stats.favouriteCategoryName}
+                    </InfoRow>
+                </SimpleCell>
         </Group>
+        }
 	</Panel>
 );
 

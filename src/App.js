@@ -21,6 +21,7 @@ const App = () => {
 	const [popout, setPopout] = useState(POPOUT_BLYAT);
 	const [categories, setCategories] = useState(null);
 	const [quizzes, setQuizes] = useState(null);
+	const [stats, setStats] = useState(null);
 
 	useEffect(() => {
 		bridge.subscribe(({ detail: { type, data }}) => {
@@ -60,12 +61,21 @@ const App = () => {
 		}
 	}
 
+	const onClickProfile = e => {
+		setPopout(POPOUT_BLYAT);
+		setActivePanel('stats');
+		api.getStats().then(newStats => {
+			setStats(newStats)
+			setPopout(null);
+		})
+	}
+
 	return (
 		<View activePanel={activePanel} popout={popout}>
-			<Home id='home' fetchedUser={fetchedUser} go={go} onClickCategory={onClickCategory} categories={categories} />
+			<Home id='home' fetchedUser={fetchedUser} go={go} onClickCategory={onClickCategory} onClickProfile={onClickProfile} categories={categories} />
 			<QuizList id='quiz_list' go={go} quizzes={quizzes}/>
-			<Stats id='stats' fetchedUser={fetchedUser} go={go} />
-			<Persik id='persik' go={go} />
+			<Stats id='stats' fetchedUser={fetchedUser} go={go} stats={stats}/>
+			<Persik id='persik' go={go}/>
 		</View>
 	);
 }
