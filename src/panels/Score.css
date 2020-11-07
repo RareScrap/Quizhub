@@ -1,0 +1,50 @@
+#coin_logo {
+    display: block;
+    width: 30%;
+    max-width: 240px;
+    margin: 20px auto;
+    margin-top: -1cm;
+    margin-bottom: 1cm;
+}
+
+#ebal_label {
+    width: 100%;
+    text-align: center;
+    font-size: 1cm;
+    margin-top: -1.7cm;
+  }
+
+  #score_label {
+    width: 100%;
+    text-align: center;
+    font-size: 1cm;
+  }
+
+  #status_label {
+    width: 100%;
+    font-size: 0.6cm;
+    text-align: center;
+  }
+
+.Book {
+  width: 20%;
+  max-width: 240px;
+  vertical-align: middle;
+}
+
+.MustBeStroka {
+  display: inline-block;
+}
+
+.CellText {
+  display: inline-block;
+}
+
+.BuyButton {
+  display: inline-block;
+    text-align: right;
+    align-self: center;
+    float: right;
+    margin-top: 11%; /* TODO: Нормально прилеплять кнопку к правому краю по середине */
+    margin-bottom: 0%;
+}

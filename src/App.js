@@ -5,6 +5,10 @@ import ScreenSpinner from '@vkontakte/vkui/dist/components/ScreenSpinner/ScreenS
 import '@vkontakte/vkui/dist/vkui.css';
 
 import Home from './panels/Home';
+import QuizList from './panels/QuizList';
+import Quiz from './panels/Quiz';
+import Score from './panels/Score';
+import Stats from './panels/Stats';
 import Persik from './panels/Persik';
 
 const App = () => {
@@ -34,7 +38,7 @@ const App = () => {
 
 	return (
 		<View activePanel={activePanel} popout={popout}>
-			<Home id='home' fetchedUser={fetchedUser} go={go} />
+			<Stats id='home' fetchedUser={fetchedUser} go={go} />
 			<Persik id='persik' go={go} />
 		</View>
 	);
