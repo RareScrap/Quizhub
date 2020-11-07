@@ -12,17 +12,17 @@ import PanelHeaderContent from '@vkontakte/vkui/dist/components/PanelHeaderConte
 import CardGrid from '@vkontakte/vkui/dist/components/CardGrid/CardGrid';
 import Card from '@vkontakte/vkui/dist/components/Card/Card';
 
-const Home = ({ id, go, onClickCategory, onClickProfile, fetchedUser, categories }) => (
+const Home = ({ id, go, onClickCategory, onClickProfile, fetchedUser, categories, onChangeSearchCategories, searchCategories }) => (
 	<Panel id={id}>
 		<PanelHeader
 			left={fetchedUser && <Avatar src={fetchedUser.photo_100} onClick={onClickProfile} data-to="stats"/>}>
 			<PanelHeaderContent>
-				<Search />
+				<Search onChange={onChangeSearchCategories} value={searchCategories} />
 			</PanelHeaderContent>
 		</PanelHeader>
 
 		<Group separator="hide">
-			{categories && categories.reduce((resultArray, item, index) => { 
+			{categories && categories.filter(anime => !searchCategories || anime.name.toLowerCase().includes(searchCategories.toLowerCase())).reduce((resultArray, item, index) => { 
 					const chunkIndex = Math.floor(index/3)
 
 					if(!resultArray[chunkIndex]) {
