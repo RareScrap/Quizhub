@@ -45,7 +45,7 @@ const Quiz = ({ id, go, run, fetchedUser, questionIndex, onClickBtnAnswer, onCha
                 }
 
                 <Div>
-                    <Button size="xl" disabled={!answerButtonEnabled} onClick={onClickBtnAnswer}>Primary</Button>
+                    <Button size="xl" disabled={!answerButtonEnabled} onClick={onClickBtnAnswer}>Далее</Button>
                 </Div>
             </Div>
         }
