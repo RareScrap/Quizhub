@@ -30,7 +30,11 @@ const Stats = ({ id, go, fetchedUser }) => (
         <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
             <Avatar size={150}></Avatar>
         </div>
-        <p id="score_label">5928 э-балов</p>
+        <p id="score_label">
+            <img id="stats_coin_logo" src="https://art.pixilart.com/7736b1d30d303e4.gif"/>
+            <span id="all_ebals">5928 э-балов</span>
+            <img id="stats_coin_logo" src="https://art.pixilart.com/7736b1d30d303e4.gif"/>
+        </p>
         <Group>
             <SimpleCell multiline>
             <InfoRow header="Пройдено за месяц">
