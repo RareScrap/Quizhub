@@ -24,15 +24,15 @@ import './Stats.css';
 
 const Stats = ({ id, go, fetchedUser }) => (
 	<Panel id={id}>
-        <PanelHeader left={<PanelHeaderBack/>} separator={false}>
+        <PanelHeader left={<PanelHeaderBack/>} separator={false} onClick={go} data-to="home">
             Статистика
         </PanelHeader>
         <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-            <Avatar size={150}></Avatar>
+            {fetchedUser && <Avatar src={fetchedUser.photo_200} size={150}/>}
         </div>
         <p id="score_label">
             <img id="stats_coin_logo" src="https://art.pixilart.com/7736b1d30d303e4.gif"/>
-            <span id="all_ebals">5928 э-балов</span>
+            <span id="all_ebals">5928 баллов</span>
             <img id="stats_coin_logo" src="https://art.pixilart.com/7736b1d30d303e4.gif"/>
         </p>
         <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', marginTop: '-1cm' }}>

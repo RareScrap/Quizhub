@@ -15,7 +15,7 @@ import Card from '@vkontakte/vkui/dist/components/Card/Card';
 const Home = ({ id, go, onClickCategory, fetchedUser, categories }) => (
 	<Panel id={id}>
 		<PanelHeader
-			left={fetchedUser && <Avatar src={fetchedUser.photo_100}/>}>
+			left={fetchedUser && <Avatar src={fetchedUser.photo_100} onClick={go} data-to="stats"/>}>
 			<PanelHeaderContent>
 				<Search />
 			</PanelHeaderContent>
@@ -36,7 +36,7 @@ const Home = ({ id, go, onClickCategory, fetchedUser, categories }) => (
 					<CardGrid>
 						{row.map(category => (
 							<Card size="s" onClick={onClickCategory} data-id={category.id}>
-								<img style={{ height: 96 }} src={category.imgUrl} />
+								<img style={{ height: 96, borderRadius: 'inherit' }} src={category.imgUrl} />
 								<h1>{category.name}</h1>
 							</Card>
 						))}
