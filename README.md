@@ -1,4 +1,4 @@
-[![Quizard](https://github.com/RareScrap/Quizhub/raw/master/logo128.png)](https://vk.com/app7653100)
+[![Quizard](https://github.com/RareScrap/Quizhub/raw/master/logo.svg)](https://vk.com/app7653100)
 
 # [Quizard](https://vk.com/app7653100)
 
