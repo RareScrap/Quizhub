@@ -22,6 +22,7 @@ import { Avatar } from '@vkontakte/vkui';
 import api from '../QuizHub-Network-Bridge/importme'
 
 import './Stats.css';
+import coin from '../img/coin.gif';
 
 const Stats = ({ id, go, fetchedUser, onClickBuyCoupons, stats }) => (
 	<Panel id={id}>
@@ -32,9 +33,9 @@ const Stats = ({ id, go, fetchedUser, onClickBuyCoupons, stats }) => (
             {fetchedUser && <Avatar src={fetchedUser.photo_200} size={150}/>}
         </div>
         <p id="score_label">
-            <img id="stats_coin_logo" src="https://art.pixilart.com/7736b1d30d303e4.gif"/>
+            <img id="stats_coin_logo" src={coin}/>
             <span id="all_ebals">{stats && stats.balance} баллов</span>
-            <img id="stats_coin_logo" src="https://art.pixilart.com/7736b1d30d303e4.gif"/>
+            <img id="stats_coin_logo" src={coin}/>
         </p>
         <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', marginTop: '-1cm' }}>
             <Button onClick={onClickBuyCoupons} data-to="shop">Обменять на купоны</Button>

@@ -16,6 +16,7 @@ import Div from '@vkontakte/vkui/dist/components/Div/Div';
 import RichCell from '@vkontakte/vkui/dist/components/RichCell/RichCell';
 
 import './Score.css';
+import coin from '../img/coin.gif';
 
 const Score = ({ id, go, fetchedUser, score }) => (
 	<Panel id={id}>
@@ -26,7 +27,7 @@ const Score = ({ id, go, fetchedUser, score }) => (
         {score &&
             <Div>
                 <p id="score_label">Вы ответили верно на {score.rightAnswerCount} из {score.totalQuestionCount} вопросов и получили</p>
-                <img id="coin_logo" src="https://art.pixilart.com/7736b1d30d303e4.gif" alt="альтернативный текст"/>
+                <img id="coin_logo" src={coin} alt="альтернативный текст"/>
                 <p id="ebal_label">{score.newEpoints} баллов</p>
                 <p id="status_label">Отличная работа!</p>
                 {score.rightAnswerCount < score.totalQuestionCount &&

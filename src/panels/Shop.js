@@ -21,7 +21,7 @@ import RichCell from '@vkontakte/vkui/dist/components/RichCell/RichCell';
 import { Avatar } from '@vkontakte/vkui';
 
 import './Shop.css';
-
+import coin from '../img/coin.gif';
 
 const Shop = ({ id, go, coupons, discounts, stats, onBuyDiscount }) => (
 	<Panel id={id}>
@@ -29,7 +29,7 @@ const Shop = ({ id, go, coupons, discounts, stats, onBuyDiscount }) => (
             Купоны
         </PanelHeader>
 
-        <img id="shop_coin_logo" src="https://art.pixilart.com/7736b1d30d303e4.gif" alt="альтернативный текст"/>
+        <img id="shop_coin_logo" src={coin} alt="альтернативный текст"/>
         <p id="ebal_label">{stats.balance} баллов</p>
 
         {coupons && coupons.coupons.length != 0 &&
