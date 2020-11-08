@@ -1,34 +1,14 @@
-[<img width="134" src="https://vk.com/images/apps/mini_apps/vk_mini_apps_logo.svg">](https://vk.com/services)
+[![Quizhub](https://sun9-50.userapi.com/yYgAJM2BCYetFU9naLqCzeAq_HrFmeC-JPgBkQ/eewD0RW7eqg.jpg)](https://vk.com/app7653100)
 
-# Create VK Mini App [![npm][npm]][npm-url] [![deps][deps]][deps-url]
+# [Quizhub](https://vk.com/app7653100)
 
-## How to install
+### Описание
 
-### Create VK Mini App with gh-pages deploy
+Поддерживайте свои знания в актуальном состоянии. Проверьте актуальность ваших профессиональных знаний в различных викторинах. QuizHub проанализует ваши ответы и предложит вам наиболее подходящую книгу для дальнейшего развития вашего скилла. И даже даст на неё скидку!
 
-`npx @vkontakte/create-vk-mini-app <app-directory-name>`
+Получай баллы за каждый правильный ответ. Обменивай полученные баллы на скидки в книжных магазинах.
 
-### Create VK Mini App with Zeit deploy
-
-Firstly, you have to create Zeit account and connect it with your GitHub profile — https://zeit.co/
-
-`npx @vkontakte/create-vk-mini-app <app-directory-name> --zeit`
-
-### Create VK Mini App with Surge deploy
-
-Firstly, you have to create Surge account and Surge-domain — https://surge.sh/
-
-`npx @vkontakte/create-vk-mini-app <app-directory-name> --surge <surge-domain>`
-
-## How to start work with app
-
-Go to created folder and run:
-`yarn start` || `npm start` — this will start dev server with hot reload on `localhost:10888`.
-
-`yarn run build` || `npm run build` — this will build production bundle, with tree-shaking, uglify and all this modern fancy stuff
-
-[npm]: https://img.shields.io/npm/v/@vkontakte/create-vk-mini-app.svg
-[npm-url]: https://npmjs.com/package/@vkontakte/create-vk-mini-app
-
-[deps]: https://img.shields.io/david/vkcom/create-vk-mini-app.svg
-[deps-url]: https://david-dm.org/vkcom/create-vk-mini-app
+### Список репозиториев:
+- [Quizhub](https://github.com/RareScrap/Quizhub) — исходный код мини-приложения;
+- [QuizHub-Network-Bridge](https://github.com/NikolayNIK/QuizHub-Network-Bridge) — слой абстракции взаимодействия мини-приложения с бэкендом;
+- [QuizHub.Server](https://github.com/VladislavSavvateev/QuizHub.Server) — бэкенд.
