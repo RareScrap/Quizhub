@@ -23,7 +23,7 @@ const Quiz = ({ id, go, run, fetchedUser, questionIndex, onClickBtnAnswer, onCha
         {run && typeof questionIndex == 'number' &&
             <Div>
                 <CardGrid style={{ margin : 20 }}>
-                    <Card style={{ padding : 20 }} size="xl" mode="shadow">
+                    <Card style={{ width : '93%', padding : 20 }} size="xl" mode="shadow">
                         <Div dangerouslySetInnerHTML={{__html: run.questions[questionIndex].text}}></Div>
                     </Card>
                 </CardGrid>
