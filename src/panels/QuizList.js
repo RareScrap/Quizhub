@@ -27,7 +27,16 @@ const QuizList = ({ id, go, onClickQuiz, fetchedUser, quizzes, onChangeSearchQui
                     quiz.run && quiz.run.cooldownAt > new Date().getTime() / 1000 ? 'Будет доступна ' + formatTime(new Date(quiz.run.cooldownAt * 1000)) : 'Cложность ' + '💣'.repeat(quiz.difficulty)
                 }</span>
                 </Cell>
+
+                
             ))}
+            
+            {
+
+            quizzes && quizzes.filter(anime => !searchQuizzes || anime.title.toLowerCase().includes(searchQuizzes.toLowerCase())).length == 0 &&
+                <Cell>Ничего не найдено</Cell>}
+            
+            
         </List>
 	</Panel>
 );

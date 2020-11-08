@@ -42,6 +42,10 @@ const Home = ({ id, go, onClickCategory, onClickProfile, fetchedUser, categories
 						))}
 					</CardGrid>
 				))}
+			{categories && categories.filter(anime => !searchCategories || anime.name.toLowerCase().includes(searchCategories.toLowerCase())).length == 0 &&
+			<div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+				<Cell>Ничего не найдено</Cell>
+			</div>}
 		</Group>
 
 {/* 
