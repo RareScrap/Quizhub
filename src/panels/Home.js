@@ -23,7 +23,7 @@ const Home = ({ id, go, onClickCategory, onClickProfile, fetchedUser, categories
 
 		<Group separator="hide">
 			{categories && categories.filter(anime => !searchCategories || anime.name.toLowerCase().includes(searchCategories.toLowerCase())).reduce((resultArray, item, index) => { 
-					const chunkIndex = Math.floor(index/3)
+					const chunkIndex = Math.floor(index/2)
 
 					if(!resultArray[chunkIndex]) {
 						resultArray[chunkIndex] = [] // start a new chunk
@@ -35,7 +35,7 @@ const Home = ({ id, go, onClickCategory, onClickProfile, fetchedUser, categories
 				}, []).map(row => (
 					<CardGrid>
 						{row.map(category => (
-							<Card key={category.id} size="s" onClick={onClickCategory} data-id={category.id}>
+							<Card key={category.id} size="m" onClick={onClickCategory} data-id={category.id}>
 								<img style={{ width : '100%', objectFit: 'cover' , height: 96, borderRadius: 'inherit' }} src={category.imgUrl} />
 								<Cell>{category.name}</Cell> {/* Нам просто нравится шрифт в cell и нам лень смотреть его ксс */}
 							</Card>
