@@ -39,7 +39,7 @@ const Shop = ({ id, go, coupons, discounts, stats, onBuyDiscount }) => (
             <RichCell
                 disabled
                 multiline
-                before={<img className="Book" src={coupon.discount.shop.imgUrl} style={{ width : '15%', margin : '16px', borderRadius: '6px' }}/>}
+                before={<img className="Book" src={coupon.discount.shop.imgUrl} style={{ width : '15%', height : '15%', margin : '16px', borderRadius: '6px' }}/>}
                 text={coupon.discount.title}
                 caption={coupon.discount.shop.name}
                 after={"Код: " + coupon.coupon}
@@ -54,7 +54,7 @@ const Shop = ({ id, go, coupons, discounts, stats, onBuyDiscount }) => (
             <RichCell
                 disabled
                 multiline
-                before={<img className="Book" src={discount.shop.imgUrl} style={{ width : '15%', margin : '16px', borderRadius: '6px' }}/>}
+                before={<img className="Book" src={discount.shop.imgUrl} style={{ width : '15%', height : '15%', margin : '16px', borderRadius: '6px' }}/>}
                 text={discount.title}
                 caption={discount.shop.name}
                 actions={

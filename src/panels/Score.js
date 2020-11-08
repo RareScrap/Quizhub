@@ -13,7 +13,7 @@ import FormLayoutGroup from '@vkontakte/vkui/dist/components/FormLayoutGroup/For
 import Input from '@vkontakte/vkui/dist/components/Input/Input';
 import Button from '@vkontakte/vkui/dist/components/Button/Button';
 import Div from '@vkontakte/vkui/dist/components/Div/Div';
-import Cell from '@vkontakte/vkui/dist/components/Cell/Cell';
+import RichCell from '@vkontakte/vkui/dist/components/RichCell/RichCell';
 
 import './Score.css';
 
@@ -34,14 +34,19 @@ const Score = ({ id, go, fetchedUser, score }) => (
                         <p id="status_label">Эти книги помогут вам завершить викторину до конца</p>
                         <List>
                             {score.books.map(book => (
-                                <Cell className="BookCell">
-                                    <img className="Book" src={book.imgUrl}/>
-                                    <Div className="CellText">
-                                        <h3>{book.title}</h3>
-                                        <h4>{book.description}</h4>
-                                    </Div>
-                                    <Button size="m" className="BuyButton" href={book.url} target="_blank">Купить</Button>
-                                </Cell>
+
+                                <RichCell
+                                    disabled
+                                    multiline
+                                    before={<img className="Book" src={book.imgUrl} style={{ width : '15%', height : '15%', margin : '16px', borderRadius: '6px' }}/>}
+                                    text={book.title}
+                                    caption={book.description}
+                                    actions={
+                                    <React.Fragment>
+                                        <Button size="m" href={book.url} target="_blank">Купить</Button>
+                                    </React.Fragment>
+                                    }
+                                />
                             ))}
                         </List>
                     </Div>
