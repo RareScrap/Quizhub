@@ -11,11 +11,12 @@ import Quiz from './panels/Quiz';
 import Score from './panels/Score';
 import Stats from './panels/Stats';
 import Shop from './panels/Shop';
+import Onboard from './panels/Onboard';
 
 const POPOUT_PROGRESS_BAR = <ScreenSpinner size='large'/>;
 
 const App = () => {
-	const [activePanel, setActivePanel] = useState('home');
+	const [activePanel, setActivePanel] = useState('onboard');
 	const [fetchedUser, setUser] = useState(null);
 	const [popout, setPopout] = useState(POPOUT_PROGRESS_BAR);
 	const [categories, setCategories] = useState(null);
@@ -204,6 +205,7 @@ const App = () => {
 			<QuizList id='quiz_list' go={go} onClickQuiz={onClickQuiz} quizzes={quizzes} onChangeSearchQuizzes={onChangeSearchQuizzes} searchQuizzes={searchQuizzes} onClickBtnQuizListBack={onClickBtnQuizListBack}/>
 			<Quiz id='run' fetchedUser={fetchedUser} run={run} questionIndex={questionIndex} setQuestionIndex={setQuestionIndex} go={go} onClickBtnAnswer={onClickBtnAnswer} onChangeQuestionCheckBox={onChangeQuestionCheckBox} onChangeQuestionRadio={onChangeQuestionRadio} onChangeQuestionText={onChangeQuestionText} answerButtonEnabled={answerButtonEnabled} />
 			<Score id='score' fetchedUser={fetchedUser} go={go} score={score}/>
+			<Onboard id='onboard'go={go}/>
 		</View>
 	);
 }
