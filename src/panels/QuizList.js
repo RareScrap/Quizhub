@@ -42,7 +42,7 @@ const QuizList = ({ id, go, onClickQuiz, fetchedUser, quizzes, onChangeSearchQui
 );
 
 function formatTime(date = new Date()) {
-    var result = 'в ';
+    var result = (date.getDate() - new Date().getDate() == 1 ? 'завтра ' : '') +  'в ';
     if (date.getHours() < 10) result += '0';
     result += date.getHours() + ':';
     if (date.getMinutes() < 10) result += '0';
