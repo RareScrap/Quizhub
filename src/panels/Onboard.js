@@ -21,18 +21,18 @@ const Onboard = ({ id, go }) => (
         style={{ height: '100vh' }}
         bullets="dark"
         >
-        <div style={{ padding: 16, color : 'white', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--destructive)' }}>
-            <span style={{ textAlign : 'center' }}>Выбирайте тесты по своему вкусу и навыку</span>
+        <div style={{ color : 'white', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--destructive)' }}>
+            <span style={{ margin : 10, display : 'inline-block', textAlign : 'center' }}>Выбирайте тесты по своему вкусу и навыку</span>
         </div>
-        <div style={{  padding: 16, color : 'white', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--accent)' }}>
-            <span style={{ textAlign : 'center' }}>Проверяйте свои знания по темам</span>
+        <div style={{ color : 'white', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--accent)' }}>
+            <span style={{ margin : 10, display : 'inline-block', textAlign : 'center' }}>Проверяйте свои знания по темам</span>
         </div>
-        <div style={{  padding: 16, color : 'white', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--accent)' }}>
-            <span style={{ textAlign : 'center' }}>Получайте баллы за правильные ответы в тестах</span>
+        <div style={{ color : 'white', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--accent)' }}>
+            <span style={{ margin : 10, display : 'inline-block', textAlign : 'center' }}>Получайте баллы за правильные ответы в тестах</span>
         </div>
-        <div style={{  padding: 16, color : 'white', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--button_commerce_background)' }}>
-            <span style={{ textAlign : 'center' }}>Тратьте накопленные баллы на скидки в книжных магазинах</span>
-            <Button size="xl" onClick={go} data-to="home" style={{ position: 'absolute', bottom: 30, marginLeft: -32 }}>Начать</Button>
+        <div style={{ color : 'white', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--button_commerce_background)' }}>
+            <span style={{ margin : 10, display : 'inline-block', textAlign : 'center' }}>Тратьте накопленные баллы на скидки в книжных магазинах</span>
+            <Button size="xl" onClick={go} data-to="home" style={{ position: 'absolute', bottom: 30 }}>Начать</Button>
         </div>
         </Gallery>
 	</Panel>
