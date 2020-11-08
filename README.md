@@ -1,6 +1,6 @@
-[![Quizhub](https://sun9-50.userapi.com/yYgAJM2BCYetFU9naLqCzeAq_HrFmeC-JPgBkQ/eewD0RW7eqg.jpg)](https://vk.com/app7653100)
+[![Quizard](https://github.com/RareScrap/Quizhub/raw/master/logo128.png)](https://vk.com/app7653100)
 
-# [Quizhub](https://vk.com/app7653100)
+# [Quizard](https://vk.com/app7653100)
 
 ### Описание
 
@@ -9,6 +9,6 @@
 Получай баллы за каждый правильный ответ. Обменивай полученные баллы на скидки в книжных магазинах.
 
 ### Список репозиториев:
-- [Quizhub](https://github.com/RareScrap/Quizhub) — исходный код мини-приложения;
-- [QuizHub-Network-Bridge](https://github.com/NikolayNIK/QuizHub-Network-Bridge) — слой абстракции взаимодействия мини-приложения с бэкендом;
-- [QuizHub.Server](https://github.com/VladislavSavvateev/QuizHub.Server) — бэкенд.
+- [Quizard](https://github.com/RareScrap/Quizhub) — исходный код мини-приложения;
+- [Quizard-Network-Bridge](https://github.com/NikolayNIK/QuizHub-Network-Bridge) — слой абстракции взаимодействия мини-приложения с бэкендом;
+- [Quizard.Server](https://github.com/VladislavSavvateev/Quizard.Server) — бэкенд.
