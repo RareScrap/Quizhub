@@ -13,12 +13,12 @@ import Stats from './panels/Stats';
 import Shop from './panels/Shop';
 import Persik from './panels/Persik';
 
-const POPOUT_BLYAT = <ScreenSpinner size='large'/>;
+const POPOUT_PROGRESS_BAR = <ScreenSpinner size='large'/>;
 
 const App = () => {
 	const [activePanel, setActivePanel] = useState('home');
 	const [fetchedUser, setUser] = useState(null);
-	const [popout, setPopout] = useState(POPOUT_BLYAT);
+	const [popout, setPopout] = useState(POPOUT_PROGRESS_BAR);
 	const [categories, setCategories] = useState(null);
 	const [searchCategories, setSearchCategories] = useState(null);
 	const [quizzes, setQuizes] = useState(null);
@@ -72,10 +72,10 @@ const App = () => {
 			let category = categories[i];
 			if (category.id === id) {
 				setQuizes(null);
-				setPopout(POPOUT_BLYAT);
+				setPopout(POPOUT_PROGRESS_BAR);
 				setActivePanel('quiz_list');
-				category.getQuizzes().then(shit => {
-					setQuizes(shit);
+				category.getQuizzes().then(thing => {
+					setQuizes(thing);
 					setPopout(null);
 				});
 				break;
@@ -89,7 +89,7 @@ const App = () => {
 			let quiz = quizzes[i];
 			if (quiz.id === id) {
 				setRun(null);
-				setPopout(POPOUT_BLYAT);
+				setPopout(POPOUT_PROGRESS_BAR);
 				setActivePanel('run');
 				quiz.start().then(run => {
 					setRun(run);
@@ -138,7 +138,7 @@ const App = () => {
 		if (questionIndex + 1 >= run.questions.length) {
 			setScore(null);
 			setActivePanel('score');
-			setPopout(POPOUT_BLYAT);
+			setPopout(POPOUT_PROGRESS_BAR);
 			run.end().then(response => {debugger;
 				setScore(response);
 				setPopout(null);
@@ -150,7 +150,7 @@ const App = () => {
 	}
 
 	const onClickProfile = e => {
-		setPopout(POPOUT_BLYAT);
+		setPopout(POPOUT_PROGRESS_BAR);
 		setActivePanel('stats');
 		api.getStats().then(newStats => {
 			setStats(newStats)
@@ -159,7 +159,7 @@ const App = () => {
 	}
 
 	const onClickBuyCoupons = e => {
-		setPopout(POPOUT_BLYAT);
+		setPopout(POPOUT_PROGRESS_BAR);
 		api.getCoupons().then(netCoupons => {
 		
 			api.getDiscounts().then(netDiscount => {
@@ -180,7 +180,7 @@ const App = () => {
 		for (let i = 0; i < discounts.discounts.length; i++) {
 			let discount = discounts.discounts[i];
 			if (discount.id === id) {
-				setPopout(POPOUT_BLYAT);
+				setPopout(POPOUT_PROGRESS_BAR);
 
 				discount.generateCoupon().then((newCoupon) => {
 					const newCoupons = coupons
